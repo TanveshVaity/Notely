@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
                 <button className="items-center justify-center border-[#1e4f78] text-[#1e4f78] border-2 hover:bg-[#1e4f78] hover:text-white active:bg-[#1e4f78] active:text-white rounded-full bg-slate-200 h-[48px] w-[90px]">Sign Up</button>
             </div>
         </div>
-    );
+    )
 };
 
 export default Navbar;

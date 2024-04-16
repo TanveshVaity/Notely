@@ -21,6 +21,4 @@ model User{
   isVerified Boolean @default(false)
   forgotPasswordToken String
   forgotPasswordTokenExpiry DateTime
-  verifyToken String
-  verifyTokenExpiry DateTime
 }
