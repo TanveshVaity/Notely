@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 import { hash } from "bcrypt";
 import { z , ZodError, ZodType} from "zod";
@@ -19,7 +19,7 @@ const userSchema : ZodType<FormData> = z.object({
     .min(6, { message: "Password must be at least 6 characters" })
 });
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {email, password } = userSchema.parse(body);
