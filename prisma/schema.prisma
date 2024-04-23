@@ -1,20 +1,70 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// Import the uuid function from the @prisma/client package
 generator client {
   provider = "prisma-client-js"
 }
 
+// Define your data source
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id Int @id @default(autoincrement())
-  email String @unique 
-  password String 
+model note {
+  id String @id @default(uuid())
+  title  String
+  content String?
+  categoryId String
+  category  category @relation(fields: [categoryId], references: [id])
+  userId    String
+  user      user     @relation(fields: [userId], references: [id])
+  @@index([categoryId])
+}
+
+model category {
+  id String @id @default(uuid())
+  name String
+  notes note[]
+}
+
+
+model account {
+  id                 String    @id @default(cuid())
+  userId             String
+  providerType       String
+  providerId         String
+  providerAccountId  String
+  refreshToken       String?
+  accessToken        String?
+  accessTokenExpires DateTime?
+  user               user     @relation(fields: [userId], references: [id])
+
+  @@unique([providerId, providerAccountId])
+}
+
+model user {
+  id       String   @id @default(uuid()) 
+  email    String   @unique
+  password String
+  sessions session[]
+  notes note[] 
+  account account[]
+}
+
+model session {
+  id           String   @id @default(uuid()) 
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         user    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model verificationRequest {
+  id         String   @id @default(cuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  @@unique([identifier, token])
 }

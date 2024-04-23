@@ -8,6 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const signupSchema = z
   .object({
@@ -44,15 +45,19 @@ const Login: React.FC = () => {
 
   const onSubmit = async () => {
     try {
-      const response = await axios.post("/api/users/signup", user);
-      console.log("Signup success", response.data);
-      router.push("/");
+      console.log("Form submitted with data:", user);
+      const loginData = await signIn("Credentials", {
+        email : user.email,
+        password : user.password,
+      })
+      console.log(loginData);
       setUser({
         email: "",
         password: "",
       });
+      router.push("/");
     } catch (error: any) {
-      console.log("Signup failed", error.message);
+      console.log("Login failed", error.message);
     }
   };
 
@@ -98,7 +103,7 @@ const Login: React.FC = () => {
             )}
           </div>
 
-          <button className="block mx-auto h-12 w-80 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded">
+          <button type="submit" className="block mx-auto h-12 w-80 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded">
             Login
           </button>
         </form>

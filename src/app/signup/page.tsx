@@ -131,7 +131,7 @@ const Signup: React.FC = () => {
               </span>
             )}
           </div>
-          <button className="block mx-auto h-12 w-80 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded">
+          <button type="submit" className="block mx-auto h-12 w-80 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded">
             Sign Up
           </button>
         </form>
