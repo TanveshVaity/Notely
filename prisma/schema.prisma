@@ -19,7 +19,7 @@ model note {
   categoryId String
   category  category @relation(fields: [categoryId], references: [id])
   userId    String
-  user      user     @relation(fields: [userId], references: [id])
+  user      users     @relation(fields: [userId], references: [id])
   @@index([categoryId])
 }
 
@@ -39,12 +39,12 @@ model account {
   refreshToken       String?
   accessToken        String?
   accessTokenExpires DateTime?
-  user               user     @relation(fields: [userId], references: [id])
+  user               users     @relation(fields: [userId], references: [id])
 
   @@unique([providerId, providerAccountId])
 }
 
-model user {
+model users {
   id       String   @id @default(uuid()) 
   email    String   @unique
   password String
@@ -58,7 +58,7 @@ model session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         user    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         users   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model verificationRequest {

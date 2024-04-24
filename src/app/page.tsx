@@ -1,14 +1,16 @@
 import Navbar from "@/components/Navbar";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/options";
+import Tabs from "@/components/Tabs";
 
 export default async function Home() {
-  const session  = await getServerSession(authOptions);
   return (
     <main>
-      <Navbar />
-      Notely
-      {JSON.stringify(session)}
+      <Navbar/>
+      <div className="pl-[128px] pt-[34px]">
+        <p className="font-bold text-xl">Your Notes</p>
+        <div className="mt-[20px]">
+          <Tabs />
+        </div>
+      </div>
     </main>
   );
 }
