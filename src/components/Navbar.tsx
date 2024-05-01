@@ -23,16 +23,18 @@ const Navbar: React.FC  = async() => {
                 />
                 </div>
                 <div>
-                <button className="flex gap-1 text-white items-center justify-center bg-[#42A5F5] hover:bg-[#2196F8] active: rounded-full h-[48px] w-[90px]">
-                    <Image
-                    src="/icons/Add.svg"
-                    alt="add icon"
-                    priority
-                    height={18}
-                    width={18}
-                    />
-                    Add
-                </button>
+                <Link href="/add-note">
+                    <button className="flex gap-1 text-white items-center justify-center bg-[#42A5F5] hover:bg-[#2196F8] active: rounded-full h-[48px] w-[90px]">
+                        <Image
+                        src="/icons/Add.svg"
+                        alt="add icon"
+                        priority
+                        height={18}
+                        width={18}
+                        />
+                        Add
+                    </button>
+                </Link>
                 </div>
             </div>
             <div className="flex gap-3">

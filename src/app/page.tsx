@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Tabs from "@/components/Tabs";
+import Tabs from "@/components/UI/Tabs";
 
 export default async function Home() {
   return (
