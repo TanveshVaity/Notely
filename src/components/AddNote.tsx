@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 
-const AddNote = () => {
+interface AddNoteProps{
+    onClose : () => void,
+}
+
+const AddNote: React.FC <AddNoteProps> = ({onClose}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("Personal");
   const [textCount, setTextCount] = useState<number>(0);
@@ -25,12 +29,12 @@ const AddNote = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="h-[400px] w-[500px] p-4 rounded-2xl border flex flex-col justify-between">
+      <div className="h-[400px] w-[500px] p-4 rounded-2xl border flex flex-col justify-between bg-white">
         <div className="flex flex-col justify-between pt-3">
           <div>
             <div className="flex justify-between items-center text-lg">
               <span className="text-gray-900 opacity-85 font-bold">Add Note</span>
-              <IoMdClose className="text-gray-600" />
+              <IoMdClose onClick={onClose} className="text-gray-600 cursor-pointer" />
             </div>
             <div className="mt-4 flex justify-between">
               <div className="flex flex-col">
@@ -87,7 +91,7 @@ const AddNote = () => {
               />
             </div>
             <div className="flex justify-end gap-3 pt-3">
-              <button className="text-gray-500">Cancel</button>
+              <button className="text-gray-500" onClick={onClose}>Cancel</button>
               <button className="flex gap-1 text-white items-center justify-center bg-[#42A5F5] hover:bg-[#2196F8] active: rounded-full h-[40px] w-[80px]">
                 Add
               </button>
