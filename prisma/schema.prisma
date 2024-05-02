@@ -16,11 +16,11 @@ model note {
   id String @id @default(uuid())
   title  String
   content String?
-  categoryId String
-  category  category @relation(fields: [categoryId], references: [id])
-  userId    String
-  user      users     @relation(fields: [userId], references: [id])
-  @@index([categoryId])
+  category_id String
+  category  category @relation(fields: [category_id], references: [id])
+  // userId    String
+  // user      users     @relation(fields: [userId], references: [id])
+  @@index([category_id])
 }
 
 model category {
@@ -49,7 +49,7 @@ model users {
   email    String   @unique
   password String
   sessions session[]
-  notes note[] 
+  // notes note[] 
   account account[]
 }
 

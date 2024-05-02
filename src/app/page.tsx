@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main>
       <Navbar toggleAddNote={toggleAddNote} />
-      <Backdrop isOpen={isAddNoteVisible} onClose={toggleAddNote}>
+      <Backdrop isOpen={isAddNoteVisible}>
         <AddNote  onClose={toggleAddNote}/>
       </Backdrop>
       <div className="pl-[128px] pt-[34px]">
